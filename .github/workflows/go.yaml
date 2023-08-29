@@ -1,0 +1,25 @@
+name: Build actions
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  act-ok:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "go.mod"
+      - run: git config --global --add safe.directory "$(pwd)"
+      - run: go build
+
+  act-fail:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "go.mod"
+      - run: go build
