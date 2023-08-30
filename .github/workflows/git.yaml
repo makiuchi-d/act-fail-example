@@ -1,0 +1,14 @@
+name: Git command
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  git:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ls -al
+      - run: git config -l
+      - run: git log -n1
