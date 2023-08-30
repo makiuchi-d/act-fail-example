@@ -5,10 +5,23 @@ on:
     branches: [ main ]
 
 jobs:
-  git:
+  git-info:
+    runs-on: ubuntu-latest
+    steps:
+      - run: id
+      - run: git config -l
+      - uses: actions/checkout@v3
+      - run: ls -al
+
+  git-ok:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -al
-      - run: git config -l
+      - run: git config --global --add safe.directory '*'
+      - run: git log -n1
+
+  git-fail:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - run: git log -n1
